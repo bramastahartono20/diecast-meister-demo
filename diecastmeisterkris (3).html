@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diecast Meister Kris — Est. 2016</title>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;600;700;800;900&family=Share+Tech+Mono&family=Saira:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{
+      --white:#FAFAF8;--paper:#F2F1EE;--paper2:#E8E7E3;
+      --ink:#111110;--ink2:#2A2A28;--mid:#888880;--faint:#C8C8C2;
+      --red:#C0252B;--red2:#9B1E23;--red-bg:rgba(192,37,43,0.06);
+      --mono:'Share Tech Mono',monospace;
+      --display:'Saira Condensed',sans-serif;
+      --body:'Saira',sans-serif;
+    }
+    html{scroll-behavior:smooth;}
+    body{background:var(--white);color:var(--ink);font-family:var(--body);font-weight:300;overflow-x:hidden;}
+    ::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-thumb{background:var(--red);}
+
+    /* NAV */
+    nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;display:flex;align-items:stretch;background:var(--ink);border-bottom:2px solid var(--red);}
+    .nav-chassis{display:flex;align-items:center;padding:0 0 0 20px;gap:16px;min-width:220px;border-right:1px solid rgba(255,255,255,0.08);}
+    .nav-entry-no{font-family:var(--display);font-size:2rem;font-weight:900;color:var(--red);line-height:1;letter-spacing:-0.02em;}
+    .nav-brand-block{display:flex;flex-direction:column;gap:1px;}
+    .nav-brand{font-family:var(--display);font-size:0.82rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#fff;line-height:1;}
+    .nav-katakana{font-size:0.58rem;letter-spacing:0.05em;color:rgba(255,255,255,0.3);font-family:var(--body);}
+    .nav-links{display:flex;align-items:stretch;list-style:none;}
+    .nav-links a{display:flex;align-items:center;padding:0 20px;font-family:var(--mono);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;border-left:1px solid rgba(255,255,255,0.06);transition:color 0.2s,background 0.2s;position:relative;}
+    .nav-links a:hover{color:var(--white);background:rgba(192,37,43,0.15);}
+    .link-num{font-size:0.5rem;color:var(--red);position:absolute;top:10px;left:10px;}
+    .nav-wa{display:flex;align-items:center;gap:8px;padding:0 24px;background:var(--red);font-family:var(--display);font-size:0.75rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#fff;text-decoration:none;margin-left:auto;transition:background 0.2s;flex-shrink:0;}
+    .nav-wa:hover{background:var(--red2);}
+
+    /* HERO */
+    #hero{
+      min-height:100vh;padding-top:56px;position:relative;overflow:hidden;display:flex;flex-direction:column;
+      /* ─── BACKGROUND IMAGE ───
+         Replace the URL below with your own image path, e.g: url('your-photo.jpg')
+         The dark overlay is handled automatically — no need to pre-darken your image. */
+      --hero-bg: url('');
+    }
+
+    /* Background image layer */
+    #hero::before{
+      content:'';
+      position:absolute;inset:0;z-index:0;
+      background-image:var(--hero-bg);
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+      /* Auto brightness reduction on the image itself */
+      filter:brightness(0.35) saturate(0.8);
+    }
+
+    /* Dark overlay on top of image — 75% black */
+    #hero::after{
+      content:'';
+      position:absolute;inset:0;z-index:1;
+      background:rgba(10,10,10,0.75);
+      pointer-events:none;
+    }
+
+    /* ─── DOUBLE RACING STRIPE — LEFT SIDE ─── */
+    .hero-stripe{
+      position:absolute;
+      left:0;top:0;bottom:0;
+      z-index:3;
+      display:flex;gap:5px;
+      pointer-events:none;
+    }
+
+    .hero-stripe-bar{
+      width:5px;
+      height:100%;
+      background:var(--red);
+      opacity:0.9;
+    }
+
+    .hero-stripe-bar:first-child{
+      /* Subtle animation: fade in from top */
+      animation:stripeReveal 1s 0.3s both;
+    }
+
+    .hero-stripe-bar:last-child{
+      background:rgba(192,37,43,0.45);
+      animation:stripeReveal 1s 0.5s both;
+    }
+
+    @keyframes stripeReveal{
+      from{transform:scaleY(0);transform-origin:top;}
+      to{transform:scaleY(1);transform-origin:top;}
+    }
+
+    .hero-bg-katakana{position:absolute;right:-40px;top:50%;transform:translateY(-50%);font-family:var(--display);font-size:clamp(180px,22vw,320px);font-weight:900;line-height:1;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,0.05);pointer-events:none;user-select:none;white-space:nowrap;z-index:2;}
+    .hero-inner{flex:1;display:grid;grid-template-columns:1fr 1fr;position:relative;z-index:4;}
+    .hero-left{padding:64px 120px 80px 48px;display:flex;flex-direction:column;justify-content:center;background:rgba(250,250,248,0.92);clip-path:polygon(0 0,100% 0,92% 100%,0 100%);position:relative;z-index:2;}
+    .hero-spec-row{display:flex;align-items:center;gap:20px;margin-bottom:28px;opacity:0;animation:fadeUp 0.6s 0.1s forwards;}
+    .spec-pill{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.08em;padding:4px 10px;border:1px solid var(--faint);color:var(--mid);}
+    .spec-pill.red{border-color:var(--red);color:var(--red);}
+    .hero-number{font-family:var(--display);font-size:clamp(5rem,10vw,10rem);font-weight:900;line-height:0.85;color:var(--red);letter-spacing:-0.02em;opacity:0;animation:fadeUp 0.7s 0.2s forwards;}
+    .hero-title-line{font-family:var(--display);font-size:clamp(2.2rem,4.5vw,4.2rem);font-weight:800;line-height:0.95;letter-spacing:0.02em;text-transform:uppercase;color:var(--ink);opacity:0;animation:fadeUp 0.7s 0.35s forwards;}
+    .hero-title-line.outline{-webkit-text-stroke:1.5px var(--ink);color:transparent;}
+    .hero-rule{width:100%;height:1px;background:linear-gradient(90deg,var(--red),transparent);margin:24px 0;opacity:0;animation:fadeUp 0.5s 0.5s forwards;}
+    .hero-tagline{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.04em;color:var(--mid);line-height:1.7;max-width:380px;opacity:0;animation:fadeUp 0.6s 0.6s forwards;}
+    .hero-tagline strong{color:var(--ink);font-weight:400;}
+    .hero-actions{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.6s 0.75s forwards;}
+    .btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:#fff;padding:12px 28px;font-family:var(--display);font-size:0.8rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,transform 0.15s;clip-path:polygon(0 0,100% 0,100% 70%,96% 100%,0 100%);}
+    .btn-primary:hover{background:var(--red2);transform:translateY(-2px);}
+    .btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--ink);border:1.5px solid var(--ink);padding:10px 26px;font-family:var(--display);font-size:0.8rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;text-decoration:none;transition:background 0.2s,color 0.2s,transform 0.15s;}
+    .btn-ghost:hover{background:var(--ink);color:#fff;transform:translateY(-2px);}
+    .hero-right{background:var(--ink);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 48px 60px 72px;overflow:hidden;}
+    .hero-right::before{content:'DMK';position:absolute;bottom:-40px;right:-20px;font-family:var(--display);font-size:220px;font-weight:900;color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;}
+    .hero-right-top{width:100%;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:20px;margin-bottom:28px;}
+    .hero-right-label{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.22em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:10px;}
+    .brands-table{width:100%;}
+    .brand-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05);transition:padding-left 0.2s;cursor:default;}
+    .brand-row:hover{padding-left:10px;}
+    .brand-row:hover .brand-row-name{color:#fff;}
+    .brand-row:hover .brand-row-tag{color:var(--red);border-color:var(--red);}
+    .brand-row-num{font-family:var(--mono);font-size:0.55rem;color:var(--red);width:28px;}
+    .brand-row-name{font-family:var(--display);font-size:1rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.7);flex:1;transition:color 0.2s;}
+    .brand-row-tag{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;padding:2px 8px;border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.25);transition:color 0.2s,border-color 0.2s;}
+    .hero-stats-row{width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,0.06);}
+    .h-stat{background:var(--ink);padding:18px 16px;}
+    .h-stat-val{font-family:var(--display);font-size:1.8rem;font-weight:900;color:#fff;line-height:1;}
+    .h-stat-val em{color:var(--red);font-style:normal;}
+    .h-stat-key{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-top:5px;}
+
+    /* TIMING STRIP */
+    .timing-strip{background:var(--red);border-top:2px solid var(--red2);border-bottom:2px solid var(--red2);padding:0;height:36px;overflow:hidden;}
+    .timing-inner{display:inline-flex;height:100%;animation:scroll 20s linear infinite;white-space:nowrap;}
+    .timing-item{display:inline-flex;align-items:center;height:100%;padding:0 28px;gap:16px;font-family:var(--mono);font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.85);border-right:1px solid rgba(255,255,255,0.15);}
+    .timing-sep{color:rgba(255,255,255,0.3);font-size:0.5rem;}
+    @keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+    /* SECTION GENERIC */
+    .section-eyebrow{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);margin-bottom:12px;}
+    .section-eyebrow::before{content:'';width:24px;height:1px;background:var(--red);}
+    .section-title{font-family:var(--display);font-size:clamp(2.4rem,4vw,3.8rem);font-weight:900;line-height:0.9;text-transform:uppercase;color:var(--ink);}
+    .section-title .red{color:var(--red);}
+    .section-title .outline{-webkit-text-stroke:1.5px var(--ink);color:transparent;}
+
+    /* ABOUT */
+    #about{padding:0;position:relative;overflow:hidden;}
+    .about-diagonal{display:grid;grid-template-columns:1fr 1fr;min-height:560px;}
+    .about-left{background:var(--paper);padding:80px 100px 80px 48px;display:flex;flex-direction:column;justify-content:center;clip-path:polygon(0 0,100% 0,88% 100%,0 100%);position:relative;z-index:2;}
+    .about-body{font-size:0.9rem;line-height:1.85;color:var(--mid);margin-top:20px;}
+    .about-body strong{color:var(--ink);font-weight:600;}
+    .about-body+.about-body{margin-top:14px;}
+    .about-right{background:var(--white);padding:80px 48px 80px 80px;display:flex;flex-direction:column;justify-content:center;}
+    .spec-sheet{border:1px solid var(--paper2);}
+    .spec-sheet-header{background:var(--ink);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
+    .spec-sheet-title{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:#fff;}
+    .spec-sheet-id{font-family:var(--mono);font-size:0.55rem;color:var(--red);}
+    .spec-row{display:flex;align-items:stretch;border-bottom:1px solid var(--paper2);}
+    .spec-row:last-child{border-bottom:none;}
+    .spec-key{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);padding:12px 16px;background:var(--paper);width:140px;flex-shrink:0;border-right:1px solid var(--paper2);display:flex;align-items:center;}
+    .spec-val{font-family:var(--display);font-size:0.88rem;font-weight:700;color:var(--ink);padding:12px 16px;display:flex;align-items:center;letter-spacing:0.04em;}
+    .spec-val .tag{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;padding:2px 8px;background:var(--red-bg);color:var(--red);border:1px solid rgba(192,37,43,0.2);margin-left:10px;}
+
+    /* CATALOG */
+    #catalog{padding:80px 48px;background:var(--white);position:relative;}
+    #catalog::before{content:'CATALOG';position:absolute;top:40px;right:40px;font-family:var(--display);font-size:120px;font-weight:900;color:transparent;-webkit-text-stroke:1px var(--paper2);pointer-events:none;z-index:0;}
+    .catalog-top{max-width:1100px;margin:0 auto 40px;display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;z-index:1;}
+    .filter-bar{display:flex;gap:0;}
+    .fbtn{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;padding:8px 18px;background:transparent;border:1px solid var(--paper2);border-right:none;color:var(--mid);cursor:pointer;transition:all 0.15s;}
+    .fbtn:last-child{border-right:1px solid var(--paper2);}
+    .fbtn:hover{background:var(--paper);color:var(--ink);}
+    .fbtn.on{background:var(--ink);color:#fff;border-color:var(--ink);}
+    .race-grid{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px;position:relative;z-index:1;}
+    .race-card{background:var(--white);border:1px solid var(--paper2);position:relative;overflow:hidden;cursor:pointer;transition:transform 0.25s,box-shadow 0.25s;}
+    .race-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.1);}
+    .race-card:hover .rc-overlay{opacity:1;}
+    .race-card:hover .rc-img-wrap{background:var(--paper2);}
+    .race-card:hover .rc-entry-no{color:var(--red);}
+    .rc-header{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 8px;border-bottom:1px solid var(--paper2);background:var(--paper);}
+    .rc-entry-no{font-family:var(--mono);font-size:0.58rem;color:var(--mid);letter-spacing:0.1em;transition:color 0.2s;}
+    .rc-cat-badge{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.12em;text-transform:uppercase;padding:3px 9px;}
+    .rc-cat-ready{background:var(--ink);color:#fff;}
+    .rc-cat-limited{background:var(--red);color:#fff;}
+    .rc-cat-random{background:transparent;color:var(--mid);border:1px solid var(--faint);}
+    .rc-img-wrap{aspect-ratio:4/3;background:var(--paper);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;position:relative;transition:background 0.25s;}
+    .rc-img-wrap svg{opacity:0.15;color:var(--ink);}
+    .rc-img-wrap span{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--faint);}
+    .rc-img-wrap::after{content:'';position:absolute;bottom:0;right:0;width:0;height:0;border-style:solid;border-width:0 0 32px 32px;border-color:transparent transparent var(--paper2) transparent;}
+    .rc-overlay{position:absolute;inset:0;background:rgba(17,17,16,0.55);opacity:0;transition:opacity 0.25s;display:flex;align-items:center;justify-content:center;}
+    .rc-overlay-btn{font-family:var(--display);font-size:0.75rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;background:var(--red);color:#fff;border:none;padding:10px 24px;cursor:pointer;clip-path:polygon(0 0,100% 0,100% 70%,96% 100%,0 100%);transition:background 0.2s;}
+    .rc-overlay-btn:hover{background:var(--red2);}
+    .rc-body{padding:14px;}
+    .rc-brand{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+    .rc-name{font-family:var(--display);font-size:1.25rem;font-weight:800;text-transform:uppercase;letter-spacing:0.03em;color:var(--ink);line-height:1.1;}
+    .rc-spec{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.06em;color:var(--mid);margin-top:4px;}
+    .rc-footer{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--paper2);}
+    .rc-price{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--mid);}
+    .rc-status{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--mid);}
+    .dot{width:5px;height:5px;border-radius:50%;background:#4CAF50;}
+    .dot.red{background:var(--red);}
+    .dot.orange{background:#E8872A;}
+
+    /* CONTACT */
+    #contact{background:var(--ink);padding:0;position:relative;overflow:hidden;}
+    #contact::before{content:'ORDER';position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:var(--display);font-size:280px;font-weight:900;color:rgba(255,255,255,0.02);line-height:1;pointer-events:none;}
+    .contact-grid{display:grid;grid-template-columns:1fr 1.2fr;min-height:600px;}
+    .contact-left{padding:80px 48px;border-right:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;}
+    .contact-label{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+    .contact-label::before{content:'';width:20px;height:1px;background:var(--red);}
+    .contact-heading{font-family:var(--display);font-size:clamp(2rem,4vw,3.5rem);font-weight:900;line-height:0.92;text-transform:uppercase;color:#fff;}
+    .contact-heading .red{color:var(--red);}
+    .contact-sub{font-family:var(--mono);font-size:0.7rem;letter-spacing:0.04em;line-height:1.75;color:rgba(255,255,255,0.35);margin-top:20px;max-width:360px;}
+    .channels{margin-top:36px;display:flex;flex-direction:column;gap:1px;}
+    .channel{display:flex;align-items:center;gap:16px;padding:14px 18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);text-decoration:none;color:#fff;transition:background 0.2s,border-color 0.2s,padding-left 0.2s;}
+    .channel:hover{background:rgba(192,37,43,0.1);border-color:rgba(192,37,43,0.3);padding-left:24px;}
+    .ch-num{font-family:var(--mono);font-size:0.55rem;color:var(--red);width:24px;}
+    .ch-ico{width:36px;height:36px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:1rem;}
+    .ch-ico.wa{color:#25D366;}.ch-ico.line{color:#00C300;}.ch-ico.tok{color:var(--red);}
+    .ch-info{display:flex;flex-direction:column;}
+    .ch-lbl{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+    .ch-val{font-family:var(--display);font-size:0.95rem;font-weight:700;letter-spacing:0.04em;color:#fff;margin-top:2px;}
+    .contact-right{padding:80px 48px;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;}
+    .form-header{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.2);padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;}
+    .form-id{color:var(--red);}
+    .order-form{display:flex;flex-direction:column;gap:14px;}
+    .fg{display:flex;flex-direction:column;gap:6px;}
+    .flbl{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+    .finput,.fselect,.ftextarea{background:rgba(255,255,255,0.04);border:none;border-bottom:1px solid rgba(255,255,255,0.12);color:#fff;padding:10px 12px;font-family:var(--mono);font-size:0.78rem;outline:none;width:100%;transition:border-color 0.2s,background 0.2s;}
+    .finput::placeholder,.ftextarea::placeholder{color:rgba(255,255,255,0.15);}
+    .finput:focus,.fselect:focus,.ftextarea:focus{border-bottom-color:var(--red);background:rgba(192,37,43,0.05);}
+    .fselect{appearance:none;cursor:pointer;}.fselect option{background:#1a1a18;}
+    .ftextarea{resize:vertical;min-height:80px;}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .fsubmit{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--red);color:#fff;border:none;padding:14px;font-family:var(--display);font-size:0.85rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;margin-top:6px;clip-path:polygon(0 0,100% 0,100% 70%,98% 100%,0 100%);transition:background 0.2s,transform 0.15s;}
+    .fsubmit:hover{background:var(--red2);transform:translateY(-2px);}
+    .fnote{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.06em;color:rgba(255,255,255,0.2);text-align:center;line-height:1.6;}
+
+    /* FOOTER */
+    footer{background:var(--ink);border-top:1px solid rgba(255,255,255,0.06);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+    .footer-logo{display:flex;align-items:center;gap:12px;}
+    .footer-num{font-family:var(--display);font-size:2rem;font-weight:900;color:var(--red);line-height:1;}
+    .footer-brand{font-family:var(--display);font-size:0.78rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fff;}
+    .footer-sub{font-family:var(--mono);font-size:0.55rem;letter-spacing:0.1em;color:rgba(255,255,255,0.2);margin-top:2px;}
+    .footer-copy{font-family:var(--mono);font-size:0.58rem;letter-spacing:0.08em;color:rgba(255,255,255,0.15);}
+    .footer-links{display:flex;gap:24px;list-style:none;}
+    .footer-links a{font-family:var(--mono);font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.2);text-decoration:none;transition:color 0.2s;}
+    .footer-links a:hover{color:var(--red);}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .rd{transition-delay:0.12s;}.rd2{transition-delay:0.24s;}
+
+    @media(max-width:860px){
+      nav{padding:0 16px;}.nav-links{display:none;}
+      #hero{display:flex;flex-direction:column;}
+      .hero-inner{grid-template-columns:1fr;}
+      .hero-left{clip-path:none;padding:60px 36px 48px;background:rgba(250,250,248,0.95);}
+      .hero-right{min-height:300px;padding:40px 24px;}
+      .hero-stripe{display:none;}
+      .about-diagonal{grid-template-columns:1fr;}.about-left{clip-path:none;padding:60px 24px;}.about-right{padding:40px 24px;}
+      .contact-grid{grid-template-columns:1fr;}.contact-left,.contact-right{padding:56px 24px;}
+      .frow{grid-template-columns:1fr;}
+      footer{padding:20px 24px;flex-direction:column;align-items:flex-start;}.footer-links{display:none;}
+      #catalog{padding:64px 20px;}
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-chassis">
+    <div class="nav-entry-no">01</div>
+    <div class="nav-brand-block">
+      <div class="nav-brand">Diecast Meister Kris</div>
+      <div class="nav-katakana">ダイキャスト・マイスター・クリス</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about"><span class="link-num">01</span>Story</a></li>
+    <li><a href="#catalog"><span class="link-num">02</span>Catalog</a></li>
+    <li><a href="#contact"><span class="link-num">03</span>Order</a></li>
+  </ul>
+  <a href="https://wa.me/6281776529909" target="_blank" class="nav-wa">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Inquire
+  </a>
+</nav>
+
+<section id="hero">
+  <!-- DOUBLE RACING STRIPE -->
+  <div class="hero-stripe">
+    <div class="hero-stripe-bar"></div>
+    <div class="hero-stripe-bar"></div>
+  </div>
+  <div class="hero-bg-katakana">ダイキャスト</div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-spec-row">
+        <span class="spec-pill red">EST. 2016</span>
+        <span class="spec-pill">1:64 SCALE</span>
+        <span class="spec-pill">IDN</span>
+      </div>
+      <div class="hero-number">DMK</div>
+      <div class="hero-title-line">Collect</div>
+      <div class="hero-title-line outline">The Legend.</div>
+      <div class="hero-rule"></div>
+      <p class="hero-tagline">Premium diecast collectibles for true enthusiasts.<br><strong>Hot Wheels · Tomica · GDC · Almost Real · Kaido House</strong><br>Every piece sourced. Every detail inspected.</p>
+      <div class="hero-actions">
+        <a href="#catalog" class="btn-primary">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          View Catalog
+        </a>
+        <a href="#contact" class="btn-ghost">Place Order →</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-right-top">
+        <div class="hero-right-label">// BRANDS ON ROSTER</div>
+        <div class="brands-table">
+          <div class="brand-row"><span class="brand-row-num">#01</span><span class="brand-row-name">Hot Wheels</span><span class="brand-row-tag">READY</span></div>
+          <div class="brand-row"><span class="brand-row-num">#02</span><span class="brand-row-name">Tomica</span><span class="brand-row-tag">READY</span></div>
+          <div class="brand-row"><span class="brand-row-num">#03</span><span class="brand-row-name">GDC</span><span class="brand-row-tag">LIMITED</span></div>
+          <div class="brand-row"><span class="brand-row-num">#04</span><span class="brand-row-name">Almost Real</span><span class="brand-row-tag">LIMITED</span></div>
+          <div class="brand-row"><span class="brand-row-num">#05</span><span class="brand-row-name">Kaido House</span><span class="brand-row-tag">LIMITED</span></div>
+        </div>
+      </div>
+      <div class="hero-stats-row">
+        <div class="h-stat"><div class="h-stat-val">8<em>+</em></div><div class="h-stat-key">YRS ACTIVE</div></div>
+        <div class="h-stat"><div class="h-stat-val">2<em>K</em></div><div class="h-stat-key">FOLLOWERS</div></div>
+        <div class="h-stat"><div class="h-stat-val"><em>100</em>%</div><div class="h-stat-key">AUTHENTIC</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="timing-strip">
+  <div class="timing-inner">
+    <span class="timing-item">HOT WHEELS <span class="timing-sep">◆</span></span><span class="timing-item">TOMICA <span class="timing-sep">◆</span></span><span class="timing-item">GDC <span class="timing-sep">◆</span></span><span class="timing-item">ALMOST REAL <span class="timing-sep">◆</span></span><span class="timing-item">KAIDO HOUSE <span class="timing-sep">◆</span></span><span class="timing-item">READY STOCK <span class="timing-sep">◆</span></span><span class="timing-item">LIMITED ED. <span class="timing-sep">◆</span></span><span class="timing-item">EST. 2016 <span class="timing-sep">◆</span></span><span class="timing-item">ダイキャスト <span class="timing-sep">◆</span></span>
+    <span class="timing-item">HOT WHEELS <span class="timing-sep">◆</span></span><span class="timing-item">TOMICA <span class="timing-sep">◆</span></span><span class="timing-item">GDC <span class="timing-sep">◆</span></span><span class="timing-item">ALMOST REAL <span class="timing-sep">◆</span></span><span class="timing-item">KAIDO HOUSE <span class="timing-sep">◆</span></span><span class="timing-item">READY STOCK <span class="timing-sep">◆</span></span><span class="timing-item">LIMITED ED. <span class="timing-sep">◆</span></span><span class="timing-item">EST. 2016 <span class="timing-sep">◆</span></span><span class="timing-item">ダイキャスト <span class="timing-sep">◆</span></span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="about-diagonal">
+    <div class="about-left reveal">
+      <div class="section-eyebrow">// ABOUT</div>
+      <h2 class="section-title">More Than<br>Just a <span class="red">Scale</span><br><span class="outline">Car.</span></h2>
+      <p class="about-body">Since <strong>2016</strong>, Diecast Meister Kris has been the go-to source for collectors across Indonesia. <em>Meister</em> — a person skilled and prominent in their field. That standard lives in every piece we carry.</p>
+      <p class="about-body">From <strong>Hot Wheels Treasure Hunts</strong> to rare <strong>Kaido House</strong> and <strong>Almost Real</strong> drops — we source what collectors actually want.</p>
+    </div>
+    <div class="about-right reveal rd">
+      <div class="spec-sheet">
+        <div class="spec-sheet-header"><span class="spec-sheet-title">// GARAGE SPEC SHEET</span><span class="spec-sheet-id">DMK-2016-IDN</span></div>
+        <div class="spec-row"><span class="spec-key">ESTABLISHED</span><span class="spec-val">2016 <span class="tag">8+ YRS</span></span></div>
+        <div class="spec-row"><span class="spec-key">LOCATION</span><span class="spec-val">Indonesia</span></div>
+        <div class="spec-row"><span class="spec-key">SCALE</span><span class="spec-val">1:64 <span class="tag">PRIMARY</span></span></div>
+        <div class="spec-row"><span class="spec-key">BRANDS</span><span class="spec-val">5 on roster</span></div>
+        <div class="spec-row"><span class="spec-key">COMMUNITY</span><span class="spec-val">2,000+ followers</span></div>
+        <div class="spec-row"><span class="spec-key">AUTHENTICITY</span><span class="spec-val">100% <span class="tag">VERIFIED</span></span></div>
+        <div class="spec-row"><span class="spec-key">SHIPPING</span><span class="spec-val">Nationwide</span></div>
+        <div class="spec-row"><span class="spec-key">TOKOPEDIA</span><span class="spec-val">diecastmeisterkris</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="catalog">
+  <div class="catalog-top reveal">
+    <div>
+      <div class="section-eyebrow">// CATALOG</div>
+      <h2 class="section-title">Race <span class="red">Entry</span><br><span class="outline">List.</span></h2>
+    </div>
+    <div class="filter-bar">
+      <button class="fbtn on" onclick="fc('all',this)">ALL</button>
+      <button class="fbtn" onclick="fc('ready',this)">READY</button>
+      <button class="fbtn" onclick="fc('random',this)">RANDOM</button>
+      <button class="fbtn" onclick="fc('limited',this)">LIMITED</button>
+    </div>
+  </div>
+  <div class="race-grid reveal rd" id="raceGrid">
+    <div class="race-card" data-cat="ready">
+      <div class="rc-header"><span class="rc-entry-no">ENTRY // 001</span><span class="rc-cat-badge rc-cat-ready">Ready</span></div>
+      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Hot Wheels — ENTRY 001')">Inquire via WA</button></div></div>
+      <div class="rc-body"><div class="rc-brand">HOT WHEELS</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · SERIES NAME · REF: HW-001</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot"></span>IN STOCK</span></div></div>
+    </div>
+    <div class="race-card" data-cat="limited">
+      <div class="rc-header"><span class="rc-entry-no">ENTRY // 002</span><span class="rc-cat-badge rc-cat-limited">Limited</span></div>
+      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Kaido House — ENTRY 002')">Inquire via WA</button></div></div>
+      <div class="rc-body"><div class="rc-brand">KAIDO HOUSE</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · LIMITED ED. · REF: KH-002</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot red"></span>LIMITED</span></div></div>
+    </div>
+    <div class="race-card" data-cat="random">
+      <div class="rc-header"><span class="rc-entry-no">ENTRY // 003</span><span class="rc-cat-badge rc-cat-random">Random</span></div>
+      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Random Pick — ENTRY 003')">Inquire via WA</button></div></div>
+      <div class="rc-body"><div class="rc-brand">MYSTERY PICK</div><div class="rc-name">Random Series</div><div class="rc-spec">1:64 · SURPRISE · REF: RND-003</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot"></span>AVAILABLE</span></div></div>
+    </div>
+    <div class="race-card" data-cat="ready">
+      <div class="rc-header"><span class="rc-entry-no">ENTRY // 004</span><span class="rc-cat-badge rc-cat-ready">Ready</span></div>
+      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Almost Real — ENTRY 004')">Inquire via WA</button></div></div>
+      <div class="rc-body"><div class="rc-brand">ALMOST REAL</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · COLLECTOR · REF: AR-004</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot"></span>IN STOCK</span></div></div>
+    </div>
+    <div class="race-card" data-cat="ready">
+      <div class="rc-header"><span class="rc-entry-no">ENTRY // 005</span><span class="rc-cat-badge rc-cat-ready">Ready</span></div>
+      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Tomica — ENTRY 005')">Inquire via WA</button></div></div>
+      <div class="rc-body"><div class="rc-brand">TOMICA</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · PREMIUM · REF: TOM-005</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot"></span>IN STOCK</span></div></div>
+    </div>
+    <div class="race-card" data-cat="limited">
+      <div class="rc-header"><span class="rc-entry-no">ENTRY // 006</span><span class="rc-cat-badge rc-cat-limited">Limited</span></div>
+      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('GDC — ENTRY 006')">Inquire via WA</button></div></div>
+      <div class="rc-body"><div class="rc-brand">GDC</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · SPECIAL REL. · REF: GDC-006</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot orange"></span>LOW STOCK</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <div class="contact-label">// ORDER</div>
+      <h2 class="contact-heading">Enter<br>The <span class="red">Pit</span><br>Lane.</h2>
+      <p class="contact-sub">Send an inquiry or reach out directly — we'll respond with pricing, stock status, and shipping info within 24 hours.</p>
+      <div class="channels">
+        <a href="https://wa.me/6281776529909" target="_blank" class="channel">
+          <span class="ch-num">#01</span>
+          <div class="ch-ico wa"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+          <div class="ch-info"><span class="ch-lbl">WhatsApp</span><span class="ch-val">0817 7652 9909</span></div>
+        </a>
+        <a href="#" class="channel">
+          <span class="ch-num">#02</span>
+          <div class="ch-ico line"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.07 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg></div>
+          <div class="ch-info"><span class="ch-lbl">LINE</span><span class="ch-val">Krishnardian</span></div>
+        </a>
+        <a href="https://www.tokopedia.com/diecastmeisterkris" target="_blank" class="channel">
+          <span class="ch-num">#03</span>
+          <div class="ch-ico tok"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+          <div class="ch-info"><span class="ch-lbl">Tokopedia</span><span class="ch-val">diecastmeisterkris</span></div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-right reveal rd">
+      <div class="form-header"><span>// ORDER FORM</span><span class="form-id">DMK-ORDER-2024</span></div>
+      <form class="order-form" onsubmit="handleSubmit(event)">
+        <div class="frow">
+          <div class="fg"><label class="flbl">Full Name</label><input type="text" class="finput" placeholder="Your name" required/></div>
+          <div class="fg"><label class="flbl">WA / LINE ID</label><input type="text" class="finput" placeholder="Contact" required/></div>
+        </div>
+        <div class="fg"><label class="flbl">Item of Interest</label><input type="text" class="finput" placeholder="e.g. Hot Wheels BMW M4, Kaido House Datsun..." required/></div>
+        <div class="frow">
+          <div class="fg"><label class="flbl">Category</label><select class="fselect"><option value="">Select</option><option>Ready Stock</option><option>Random Pick</option><option>Limited Edition</option><option>Pre-Order</option></select></div>
+          <div class="fg"><label class="flbl">Brand</label><select class="fselect"><option value="">Select</option><option>Hot Wheels</option><option>Tomica</option><option>GDC</option><option>Almost Real</option><option>Kaido House</option><option>Other</option></select></div>
+        </div>
+        <div class="fg"><label class="flbl">Notes</label><textarea class="ftextarea" placeholder="Variant, color, series, or any other details..."></textarea></div>
+        <button type="submit" class="fsubmit">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          SEND VIA WHATSAPP
+        </button>
+        <p class="fnote">// reply within 24 hours via WA or LINE</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">
+    <div class="footer-num">DMK</div>
+    <div><div class="footer-brand">Diecast Meister Kris</div><div class="footer-sub">ダイキャスト・マイスター · Est. 2016 · Indonesia</div></div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#about">Story</a></li><li><a href="#catalog">Catalog</a></li><li><a href="#contact">Order</a></li>
+    <li><a href="https://www.tokopedia.com/diecastmeisterkris" target="_blank">Tokopedia</a></li>
+  </ul>
+  <div class="footer-copy">© 2024 DMK · All rights reserved</div>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*100);obs.unobserve(e.target);}});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  function fc(cat,btn){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('.race-card').forEach(card=>{if(cat==='all'||card.dataset.cat===cat){card.style.display='';card.style.opacity='0';card.style.transform='translateY(10px)';setTimeout(()=>{card.style.transition='opacity 0.3s,transform 0.3s';card.style.opacity='1';card.style.transform='translateY(0)';},20);}else{card.style.display='none';}});}
+  function inquire(item){const msg=encodeURIComponent(`Halo Kris! Saya tertarik dengan: ${item}.\nBisa info harga & stok? Terima kasih!`);window.open(`https://wa.me/6281776529909?text=${msg}`,'_blank');}
+  function handleSubmit(e){e.preventDefault();const f=e.target;const name=f.querySelector('input[placeholder="Your name"]').value;const contact=f.querySelector('input[placeholder="Contact"]').value;const item=f.querySelector('input[placeholder*="Hot Wheels"]').value;const notes=f.querySelector('textarea').value;const msg=encodeURIComponent(`Halo Kris! Saya mau order:\n\nNama: ${name}\nKontak: ${contact}\nItem: ${item}\nCatatan: ${notes||'-'}\n\nMohon info harga & ketersediaan. Terima kasih!`);window.open(`https://wa.me/6281776529909?text=${msg}`,'_blank');}
+</script>
+</body>
+</html>
