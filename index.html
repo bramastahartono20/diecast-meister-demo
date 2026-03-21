@@ -250,6 +250,13 @@
     .reveal.visible{opacity:1;transform:translateY(0);}
     .rd{transition-delay:0.12s;}.rd2{transition-delay:0.24s;}
 
+    /* LOADING STATE */
+    .rc-loading{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:12px;padding:60px 20px;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);}
+    .rc-loading-spinner{width:18px;height:18px;border:2px solid var(--paper2);border-top-color:var(--red);border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .rc-empty{grid-column:1/-1;padding:60px 20px;text-align:center;font-family:var(--mono);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--mid);}
+    .rc-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;}
+
     @media(max-width:860px){
       nav{padding:0 16px;}.nav-links{display:none;}
       #hero{display:flex;flex-direction:column;}
@@ -378,35 +385,9 @@
     </div>
   </div>
   <div class="race-grid reveal rd" id="raceGrid">
-    <div class="race-card" data-cat="ready">
-      <div class="rc-header"><span class="rc-entry-no">ENTRY // 001</span><span class="rc-cat-badge rc-cat-ready">Ready</span></div>
-      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Hot Wheels — ENTRY 001')">Inquire via WA</button></div></div>
-      <div class="rc-body"><div class="rc-brand">HOT WHEELS</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · SERIES NAME · REF: HW-001</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot"></span>IN STOCK</span></div></div>
-    </div>
-    <div class="race-card" data-cat="limited">
-      <div class="rc-header"><span class="rc-entry-no">ENTRY // 002</span><span class="rc-cat-badge rc-cat-limited">Limited</span></div>
-      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Kaido House — ENTRY 002')">Inquire via WA</button></div></div>
-      <div class="rc-body"><div class="rc-brand">KAIDO HOUSE</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · LIMITED ED. · REF: KH-002</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot red"></span>LIMITED</span></div></div>
-    </div>
-    <div class="race-card" data-cat="random">
-      <div class="rc-header"><span class="rc-entry-no">ENTRY // 003</span><span class="rc-cat-badge rc-cat-random">Random</span></div>
-      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Random Pick — ENTRY 003')">Inquire via WA</button></div></div>
-      <div class="rc-body"><div class="rc-brand">MYSTERY PICK</div><div class="rc-name">Random Series</div><div class="rc-spec">1:64 · SURPRISE · REF: RND-003</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot"></span>AVAILABLE</span></div></div>
-    </div>
-    <div class="race-card" data-cat="ready">
-      <div class="rc-header"><span class="rc-entry-no">ENTRY // 004</span><span class="rc-cat-badge rc-cat-ready">Ready</span></div>
-      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Almost Real — ENTRY 004')">Inquire via WA</button></div></div>
-      <div class="rc-body"><div class="rc-brand">ALMOST REAL</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · COLLECTOR · REF: AR-004</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot"></span>IN STOCK</span></div></div>
-    </div>
-    <div class="race-card" data-cat="ready">
-      <div class="rc-header"><span class="rc-entry-no">ENTRY // 005</span><span class="rc-cat-badge rc-cat-ready">Ready</span></div>
-      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('Tomica — ENTRY 005')">Inquire via WA</button></div></div>
-      <div class="rc-body"><div class="rc-brand">TOMICA</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · PREMIUM · REF: TOM-005</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot"></span>IN STOCK</span></div></div>
-    </div>
-    <div class="race-card" data-cat="limited">
-      <div class="rc-header"><span class="rc-entry-no">ENTRY // 006</span><span class="rc-cat-badge rc-cat-limited">Limited</span></div>
-      <div class="rc-img-wrap"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span><div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('GDC — ENTRY 006')">Inquire via WA</button></div></div>
-      <div class="rc-body"><div class="rc-brand">GDC</div><div class="rc-name">Model Name</div><div class="rc-spec">1:64 · SPECIAL REL. · REF: GDC-006</div><div class="rc-footer"><span class="rc-price">DM FOR PRICE</span><span class="rc-status"><span class="dot orange"></span>LOW STOCK</span></div></div>
+    <div class="rc-loading" id="rcLoading">
+      <span class="rc-loading-spinner"></span>
+      <span>Loading Catalog...</span>
     </div>
   </div>
 </section>
@@ -471,11 +452,172 @@
 </footer>
 
 <script>
+  /* ═══════════════════════════════════════════════════
+     CONFIG — Paste your Google Sheets CSV URL here
+     How to get it:
+       1. Open Google Sheet → File → Share → Publish to web
+       2. Select Sheet1, format = Comma-separated values (.csv)
+       3. Click Publish → copy URL → paste below
+  ═══════════════════════════════════════════════════ */
+  const CONFIG = {
+    SHEET_CSV_URL: "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/pub?output=csv",
+    WA_NUMBER: "6281776529909",
+  };
+
+  /* ── Scroll reveal ── */
   const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*100);obs.unobserve(e.target);}});},{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-  function fc(cat,btn){document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.querySelectorAll('.race-card').forEach(card=>{if(cat==='all'||card.dataset.cat===cat){card.style.display='';card.style.opacity='0';card.style.transform='translateY(10px)';setTimeout(()=>{card.style.transition='opacity 0.3s,transform 0.3s';card.style.opacity='1';card.style.transform='translateY(0)';},20);}else{card.style.display='none';}});}
-  function inquire(item){const msg=encodeURIComponent(`Halo Kris! Saya tertarik dengan: ${item}.\nBisa info harga & stok? Terima kasih!`);window.open(`https://wa.me/6281776529909?text=${msg}`,'_blank');}
-  function handleSubmit(e){e.preventDefault();const f=e.target;const name=f.querySelector('input[placeholder="Your name"]').value;const contact=f.querySelector('input[placeholder="Contact"]').value;const item=f.querySelector('input[placeholder*="Hot Wheels"]').value;const notes=f.querySelector('textarea').value;const msg=encodeURIComponent(`Halo Kris! Saya mau order:\n\nNama: ${name}\nKontak: ${contact}\nItem: ${item}\nCatatan: ${notes||'-'}\n\nMohon info harga & ketersediaan. Terima kasih!`);window.open(`https://wa.me/6281776529909?text=${msg}`,'_blank');}
+
+  /* ── Filter (works on dynamically rendered cards too) ── */
+  function fc(cat,btn){
+    document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.race-card').forEach(card=>{
+      if(cat==='all'||card.dataset.cat===cat){
+        card.style.display='';
+        card.style.opacity='0';card.style.transform='translateY(10px)';
+        setTimeout(()=>{card.style.transition='opacity 0.3s,transform 0.3s';card.style.opacity='1';card.style.transform='translateY(0)';},20);
+      }else{card.style.display='none';}
+    });
+  }
+
+  /* ── WA inquire ── */
+  function inquire(item){
+    const msg=encodeURIComponent(`Halo Kris! Saya tertarik dengan: ${item}.\nBisa info harga & stok? Terima kasih!`);
+    window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${msg}`,'_blank');
+  }
+
+  /* ── Order form submit ── */
+  function handleSubmit(e){
+    e.preventDefault();
+    const f=e.target;
+    const name=f.querySelector('input[placeholder="Your name"]').value;
+    const contact=f.querySelector('input[placeholder="Contact"]').value;
+    const item=f.querySelector('input[placeholder*="Hot Wheels"]').value;
+    const notes=f.querySelector('textarea').value;
+    const msg=encodeURIComponent(`Halo Kris! Saya mau order:\n\nNama: ${name}\nKontak: ${contact}\nItem: ${item}\nCatatan: ${notes||'-'}\n\nMohon info harga & ketersediaan. Terima kasih!`);
+    window.open(`https://wa.me/${CONFIG.WA_NUMBER}?text=${msg}`,'_blank');
+  }
+
+  /* ═══════════════════════════════════════════════════
+     GOOGLE DRIVE URL CONVERTER
+     Converts share links → direct thumbnail URL
+  ═══════════════════════════════════════════════════ */
+  function convertDriveUrl(url){
+    if(!url||url.trim()===''||url.trim()==='-') return null;
+    url=url.trim();
+    let fileId=null;
+    const m1=url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+    const m2=url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if(m1) fileId=m1[1];
+    else if(m2) fileId=m2[1];
+    if(fileId) return `https://drive.google.com/thumbnail?id=${fileId}&sz=w600`;
+    return url; // already direct URL
+  }
+
+  /* ═══════════════════════════════════════════════════
+     CSV PARSER
+  ═══════════════════════════════════════════════════ */
+  function parseCSV(text){
+    const lines=text.trim().split('\n');
+    const headers=lines[0].split(',').map(h=>h.trim().replace(/^"|"$/g,'').toLowerCase());
+    const rows=[];
+    for(let i=1;i<lines.length;i++){
+      if(!lines[i].trim()) continue;
+      const values=[];let cur='';let inQ=false;
+      for(let c=0;c<lines[i].length;c++){
+        if(lines[i][c]==='"'){inQ=!inQ;continue;}
+        if(lines[i][c]===','&&!inQ){values.push(cur.trim());cur='';continue;}
+        cur+=lines[i][c];
+      }
+      values.push(cur.trim());
+      const row={};
+      headers.forEach((h,idx)=>{row[h]=values[idx]||'';});
+      rows.push(row);
+    }
+    return rows;
+  }
+
+  /* ═══════════════════════════════════════════════════
+     CARD RENDERER — matches your exact .race-card HTML
+  ═══════════════════════════════════════════════════ */
+  function getCat(status){
+    const s=(status||'').toLowerCase();
+    if(s.includes('limit')) return 'limited';
+    if(s.includes('random')||s.includes('mystery')) return 'random';
+    return 'ready';
+  }
+
+  function renderCard(p,index){
+    const cat=getCat(p['status']||p['stok']||'');
+    const brand=(p['brand']||'HOT WHEELS').toUpperCase();
+    const model=p['model']||p['nama model']||p['model name']||'Model Name';
+    const series=(p['series']||p['seri']||'SERIES').toUpperCase();
+    const ref=p['ref']||p['kode']||`REF-${String(index+1).padStart(3,'0')}`;
+    const price=p['price']||p['harga']||'DM FOR PRICE';
+    const imgUrl=convertDriveUrl(p['image']||p['image url']||p['foto']||'');
+    const entryNo=String(index+1).padStart(3,'0');
+
+    const badgeClass=cat==='limited'?'rc-cat-limited':cat==='random'?'rc-cat-random':'rc-cat-ready';
+    const badgeLabel=cat==='limited'?'Limited':cat==='random'?'Random':'Ready';
+    const dotClass=cat==='limited'?'dot red':cat==='random'?'dot orange':'dot';
+    const statusLabel=cat==='limited'?'LIMITED':cat==='random'?'AVAILABLE':'IN STOCK';
+
+    const imgHTML=imgUrl
+      ? `<img src="${imgUrl}" alt="${model}" loading="lazy" onerror="this.style.display='none'">`
+      : `<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="2" y="7" width="20" height="10" rx="2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg><span>Insert Photo</span>`;
+
+    return `<div class="race-card" data-cat="${cat}">
+      <div class="rc-header"><span class="rc-entry-no">ENTRY // ${entryNo}</span><span class="rc-cat-badge ${badgeClass}">${badgeLabel}</span></div>
+      <div class="rc-img-wrap">${imgHTML}<div class="rc-overlay"><button class="rc-overlay-btn" onclick="inquire('${brand} — ${model}')">Inquire via WA</button></div></div>
+      <div class="rc-body"><div class="rc-brand">${brand}</div><div class="rc-name">${model}</div><div class="rc-spec">1:64 · ${series} · REF: ${ref}</div><div class="rc-footer"><span class="rc-price">${price}</span><span class="rc-status"><span class="${dotClass}"></span>${statusLabel}</span></div></div>
+    </div>`;
+  }
+
+  /* ── Fallback demo cards (shown before sheet is configured) ── */
+  function getDemoProducts(){
+    return [
+      {brand:'Hot Wheels',model:'Model Name',series:'TH Series',ref:'HW-001',status:'Ready',image:''},
+      {brand:'Kaido House',model:'Model Name',series:'Limited Ed.',ref:'KH-002',status:'Limited',image:''},
+      {brand:'Mystery Pick',model:'Random Series',series:'Surprise',ref:'RND-003',status:'Random',image:''},
+      {brand:'Almost Real',model:'Model Name',series:'Collector',ref:'AR-004',status:'Ready',image:''},
+      {brand:'Tomica',model:'Model Name',series:'Premium',ref:'TOM-005',status:'Ready',image:''},
+      {brand:'GDC',model:'Model Name',series:'Special Rel.',ref:'GDC-006',status:'Limited',image:''},
+    ];
+  }
+
+  /* ═══════════════════════════════════════════════════
+     LOAD PRODUCTS FROM GOOGLE SHEETS
+  ═══════════════════════════════════════════════════ */
+  async function loadProducts(){
+    const grid=document.getElementById('raceGrid');
+
+    if(CONFIG.SHEET_CSV_URL.includes('YOUR_SHEET_ID')){
+      // No sheet configured yet — show demo cards
+      const html=getDemoProducts().map((p,i)=>renderCard(p,i)).join('');
+      grid.innerHTML=html;
+      return;
+    }
+
+    try{
+      const res=await fetch(CONFIG.SHEET_CSV_URL);
+      if(!res.ok) throw new Error('Network error');
+      const text=await res.text();
+      const products=parseCSV(text);
+
+      if(!products.length){
+        grid.innerHTML=`<div class="rc-state-wrap"><span class="rc-state-txt">Sheet is empty — add products to your Google Sheet.</span></div>`;
+        return;
+      }
+
+      grid.innerHTML=products.map((p,i)=>renderCard(p,i)).join('');
+    }catch(err){
+      console.error(err);
+      grid.innerHTML=`<div class="rc-state-wrap"><span class="rc-state-txt">Could not load catalog. Check SHEET_CSV_URL in the config.</span></div>`;
+    }
+  }
+
+  loadProducts();
 </script>
 </body>
 </html>
