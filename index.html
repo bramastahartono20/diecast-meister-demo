@@ -592,7 +592,7 @@
   async function loadProducts(){
     const grid=document.getElementById('raceGrid');
 
-    if(CONFIG.SHEET_CSV_URL.includes('https://docs.google.com/spreadsheets/d/e/2PACX-1vSkRaXtYaZmj8sjeErMFNT94IFMaLvWtI64ldLIkWziCcRRMVIT6y3t57XhMgkOiOHFmoSbRwvW8mBR/pub?gid=0&single=true&output=csv')){
+    if(CONFIG.SHEET_CSV_URL.includes('YOUR_SHEET_ID')){
       // No sheet configured yet — show demo cards
       const html=getDemoProducts().map((p,i)=>renderCard(p,i)).join('');
       grid.innerHTML=html;
